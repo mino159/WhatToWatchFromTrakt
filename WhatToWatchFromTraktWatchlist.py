@@ -5,18 +5,18 @@ username="mino159"		#your nick on trakt.tv
 
 def main():
 	all_titles=giveList()
-	print(choice(all_titles))
+	print(choice(all_titles)) #choose one item from whole list
 
 def giveList():
+	"""Go on website and return all titles from watchlist"""
 	url=f"https://trakt.tv/users/{username}/watchlist"
 	response = requests.get(url)
-	# print(response.text)
 	all_titles=find_all(response.text,"<div class=\"titles\"><h3>","<")
 	return all_titles
 
 
-def find_all(a_str, sub_start,sub_end):
-	"find all the titles of games"
+def find_all(a_str : str, sub_start : str, sub_end : str):
+	"""Return strings between sub_start and sub_end in a_str"""
 	names=[]
 	start = 0;
 	while True:
